@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      volumes:
+      - name: custom-tools
+        emptyDir: {}
+      initContainers:
+      - name: download-tools
+        image: curlimages/curl
+        command: ["sh", "-c"]
+        args:
+        - |
+            curl -Lo /custom-tools/jb https://github.com/jsonnet-bundler/jsonnet-bundler/releases/latest/download/jb-linux-amd64 \
+            && curl -Lo /custom-tools/tk https://github.com/grafana/tanka/releases/download/v0.22.1/tk-linux-amd64 \
+            && chmod +x /custom-tools/tk && chmod +x /custom-tools/jb
+        volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+      containers:
+      - name: argocd-repo-server
+        volumeMounts:
+        - mountPath: /usr/local/bin/jb
+          subPath: jb
+          name: custom-tools
+        - mountPath: /usr/local/bin/tk
+          subPath: tk
+          name: custom-tools
+        
+

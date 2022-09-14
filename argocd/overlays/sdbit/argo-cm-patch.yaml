@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  url: https://argocd.k8s.savinodelbene.com
+  exec.enabled: "true"
+  configManagementPlugins: |
+    - name: kustomized-helm
+      init:
+        command: ["/bin/sh", "-c"]
+        args: ["helm dependency build"]
+      generate:
+        command: [sh, -c]
+        args: ["helm template --release-name $ARGOCD_ENV_RELEASE_NAME $NAMESPACE --kube-version $KUBE_VERSION --api-versions $KUBE_API_VERSIONS --include-crds $ARGOCD_ENV_CUSTOM_VALUES_FILES . > all.yaml && kustomize build"]
+    - name: kustomized-remote-helm
+      init:
+        command: ["/bin/sh", "-c"]
+        args: ["helm repo add $ARGOCD_ENV_HELM_REPO_URL && helm repo update"]
+      generate:
+        command: [sh, -c]
+        args: ["helm template $ARGOCD_ENV_OPTIONS --kube-version $KUBE_VERSION --api-versions $KUBE_API_VERSIONS --include-crds > all.yaml && kustomize build"]
+    - name: tk
+      init:
+        command: [sh, -c]
+        args: ["jb install"]
+      generate:
+        command: [sh, -c]
+        args: ["tk show environments/${ARGOCD_ENV_TK_ENV} --dangerous-allow-redirect ${ARGOCD_ENV_EXTRA_ARGS}"]
+  resource.exclusions: |
+    - apiGroups:
+      - config.istio.io/v1alpha2
+      kinds:
+      - rule
+      clusters:
+      - "*.local"
+    - apiGroups:
+      - velero.io
+      kinds:
+      - Backup
+      clusters:
+      - "*"
+  resource.customizations: |
+    bitnami.com/SealedSecret:
+      health.lua: |
+        hs = {}
+        hs.status = "Healthy"
+        hs.message = "Controller doesn't report resource status"
+        return hs
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  
