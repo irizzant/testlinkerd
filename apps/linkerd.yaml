@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: linkerd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: linkerd
+    repoURL: 'https://github.com/irizzant/testlinkerd.git'
+    targetRevision: main
+    plugin:
+      name: kustomized-remote-helm
+      env:
+        - name: HELM_REPO_URL
+          value: "linkerd https://helm.linkerd.io/stable"
+        - name: OPTIONS
+          value: "--release-name linkerd --version 2.11.2 --set-file identityTrustAnchorsPEM=ca.crt --set-file identity.issuer.tls.crtPEM=issuer.crt --set-file identity.issuer.tls.keyPEM=issuer.key -f https://raw.githubusercontent.com/linkerd/linkerd2/main/charts/linkerd-control-plane/values-ha.yaml linkerd/linkerd2"
+  project: default
+  syncPolicy:
+    automated: {}
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks
+  - kind: Secret
+    jsonPointers:
+    - /data/tls.crt
+    - /data/tls.key
+  - group: "apps"
+    kind: Deployment
+    jsonPointers:
+    - /spec/template/metadata/annotations
+  - group: apiregistration.k8s.io
+    kind: APIService
+    jsonPointers:
+    - /spec/caBundle
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    jsonPointers:
+    - /spec/preserveUnknownFields
