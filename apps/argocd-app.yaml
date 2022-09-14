@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps
+  name: argo-cd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: 'https://github.com/irizzant/testlinkerd.git'
-    path: apps
+    path: argocd/overlays/sdbit
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
@@ -19,4 +19,3 @@ spec:
       selfHeal: true
     syncOptions:
       - PruneLast=true
-
