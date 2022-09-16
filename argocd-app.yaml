@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/irizzant/testlinkerd.git'
     path: apps
-    targetRevision: aggiornamento_con_kustomize
+    targetRevision: kustomize-old
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
