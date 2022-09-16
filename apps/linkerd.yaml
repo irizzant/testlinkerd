@@ -14,7 +14,7 @@ spec:
     repoURL: 'https://github.com/irizzant/testlinkerd.git'
     targetRevision: kustomize-old
     plugin:
-      name: kustomized-remote-helm
+      name: aggiornamento_con_kustomize
       env:
       - name: HELM_REPO_URL
         value: "linkerd https://helm.linkerd.io/stable"
