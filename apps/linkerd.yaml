@@ -10,29 +10,16 @@ metadata:
 spec:
   project: default
   source:
-    chart: linkerd2
-    repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.11.4
-    helm:
-      parameters:
-      - name: installNamespace
-        value: "false"
-      - name: identityTrustAnchorsPEM
-        value: |
-          -----BEGIN CERTIFICATE-----
-          MIIBjjCCATOgAwIBAgIQJZkgeGMskxynou5i4LzRzzAKBggqhkjOPQQDAjAlMSMw
-          IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMjA5MTYwNzAw
-          MjNaFw0zMjA5MTMwNzAwMjNaMCUxIzAhBgNVBAMTGnJvb3QubGlua2VyZC5jbHVz
-          dGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEVDV2mqcD3fDTGg+N
-          AtwB4SdlZs54AJM2r7p8dsbb+GsoDI59FvZ8UFSQH9kSqeLOa7veAaZFnvqLlfPo
-          /4CzkKNFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
-          VR0OBBYEFCyTdjV2D/K3Xzj/g7MxlBPmjDo8MAoGCCqGSM49BAMCA0kAMEYCIQDy
-          7S1bXLMaw99DT/A5DOhKoXaeWJwlGaf2YcXTRkvpTgIhAIOisN+lH/6QJPMDhjjy
-          Ibfb2Cx5YF5lHSJZ56qUSaTh
-          -----END CERTIFICATE-----
-          
-      - name: identity.issuer.scheme
-        value: kubernetes.io/tls
+    path: linkerd
+    repoURL: 'https://github.com/irizzant/testlinkerd.git'
+    targetRevision: aggiornamento_con_kustomize
+    plugin:
+      name: kustomized-remote-helm
+      env:
+      - name: HELM_REPO_URL
+        value: "linkerd https://helm.linkerd.io/stable"
+      - name: OPTIONS
+        value: "--release-name linkerd -n linkerd --version 2.11.4 -f values-sdbit.yaml linkerd/linkerd2"      
   destination:
     namespace: linkerd
     server: https://kubernetes.default.svc

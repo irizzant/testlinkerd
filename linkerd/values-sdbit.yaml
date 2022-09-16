@@ -1,0 +1,18 @@
+installNamespace: false
+
+identityTrustAnchorsPEM: |
+  -----BEGIN CERTIFICATE-----
+  MIIBjjCCATOgAwIBAgIQJZkgeGMskxynou5i4LzRzzAKBggqhkjOPQQDAjAlMSMw
+  IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMjA5MTYwNzAw
+  MjNaFw0zMjA5MTMwNzAwMjNaMCUxIzAhBgNVBAMTGnJvb3QubGlua2VyZC5jbHVz
+  dGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEVDV2mqcD3fDTGg+N
+  AtwB4SdlZs54AJM2r7p8dsbb+GsoDI59FvZ8UFSQH9kSqeLOa7veAaZFnvqLlfPo
+  /4CzkKNFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
+  VR0OBBYEFCyTdjV2D/K3Xzj/g7MxlBPmjDo8MAoGCCqGSM49BAMCA0kAMEYCIQDy
+  7S1bXLMaw99DT/A5DOhKoXaeWJwlGaf2YcXTRkvpTgIhAIOisN+lH/6QJPMDhjjy
+  Ibfb2Cx5YF5lHSJZ56qUSaTh
+  -----END CERTIFICATE-----
+
+identity:
+  issuer:
+    scheme: kubernetes.io/tls
