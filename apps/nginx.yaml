@@ -21,6 +21,10 @@ spec:
           # Defaults to false
           watchIngressWithoutClass: true
           
+          admissionWebhooks:
+            annotations:
+              "linkerd.io/inject": disabled
+          
           ## Additional command line arguments to pass to nginx-ingress-controller
           ## E.g. to specify the default SSL certificate you can use
           ## extraArgs:
