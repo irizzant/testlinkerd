@@ -10,9 +10,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: linkerd2
+    chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.11.4
+    targetRevision: 1.9.0
     helm:
       parameters:
       - name: installNamespace
@@ -39,6 +39,7 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+      prune: true
   ignoreDifferences:
   - group: ""
     kind: Secret
