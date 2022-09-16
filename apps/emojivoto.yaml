@@ -3,11 +3,19 @@ kind: Application
 metadata:
   name: emojivoto
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: emojivoto
     server: https://kubernetes.default.svc
   project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
   source:
     path: emojivoto
     repoURL: https://github.com/irizzant/testlinkerd.git
