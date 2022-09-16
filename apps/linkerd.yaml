@@ -12,7 +12,7 @@ spec:
   source:
     path: linkerd
     repoURL: 'https://github.com/irizzant/testlinkerd.git'
-    targetRevision: aggiornamento_con_kustomize
+    targetRevision: kustomize-old
     plugin:
       name: kustomized-remote-helm
       env:
