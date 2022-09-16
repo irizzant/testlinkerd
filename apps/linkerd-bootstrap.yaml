@@ -15,3 +15,7 @@ spec:
   source:
     path: linkerd-bootstrap
     repoURL: https://github.com/irizzant/testlinkerd.git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
