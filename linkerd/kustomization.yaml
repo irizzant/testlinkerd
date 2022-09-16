@@ -3,3 +3,6 @@ kind: Kustomization
 
 resources:
 - all.yaml
+- linkerd-webook-certificates.yaml
+- linkerd-webook-issuer.yaml
+- webhook-issuer-tls.yaml

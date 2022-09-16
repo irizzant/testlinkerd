@@ -16,3 +16,75 @@ identityTrustAnchorsPEM: |
 identity:
   issuer:
     scheme: kubernetes.io/tls
+    
+policyValidator:
+  # -- Do not create a secret resource for the policyValidator webhook. If this is set to `true`, the value `policyValidator.caBundle` must be set (see below).
+  externalSecret: true
+
+  # -- Certificate for the policy validator. If not provided then Helm
+  # will generate one.
+  crtPEM: |
+  # -- Certificate key for the policy validator. If not provided then
+  # Helm will generate one.
+  keyPEM: |
+  # -- Bundle of CA certificates for policy validator. If not provided
+  # then Helm will use the certificate generated  for `policyValidator.crtPEM`.
+  # If `policyValidator.externalSecret` is set to true, this value must be set,
+  # as no certificate will be generated.
+  caBundle: |
+    -----BEGIN CERTIFICATE-----
+    MIIBkzCCATqgAwIBAgIRAPtuo5zCwwWsWUOsOiI6f68wCgYIKoZIzj0EAwIwKDEm
+    MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjIwOTE2
+    MTg0NTIzWhcNMzIwOTEzMTg0NTIzWjAoMSYwJAYDVQQDEx13ZWJob29rLmxpbmtl
+    cmQuY2x1c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABGPdjCJy
+    RV1GWyxSOGxkAeGuqjkRMUAOLQffDdwwrqseo55GOMNH9ad3Pw6e4w3VKKH6B0C/
+    +ub0HGARG+/DluyjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/
+    AgEBMB0GA1UdDgQWBBQRluVDpfvtfJiQ4+Echrgy6YaWlTAKBggqhkjOPQQDAgNH
+    ADBEAiAqg7H44HWHAyd8crJGL5KXqa8np7V2IniTWjWAZ+tT2gIgF3/J0zHxx3qZ
+    WkFa/RUc9jVUqnTKqsfllIP3Y9etTWs=
+    -----END CERTIFICATE-----
+
+proxyInjector:
+  externalSecret: true
+
+  # if empty, Helm will auto-generate these fields
+  crtPEM: |
+
+  keyPEM: |
+
+  # if empty, Helm will auto-generate this field, unless externalSecret is set to true.
+  caBundle: |
+    -----BEGIN CERTIFICATE-----
+    MIIBkzCCATqgAwIBAgIRAPtuo5zCwwWsWUOsOiI6f68wCgYIKoZIzj0EAwIwKDEm
+    MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjIwOTE2
+    MTg0NTIzWhcNMzIwOTEzMTg0NTIzWjAoMSYwJAYDVQQDEx13ZWJob29rLmxpbmtl
+    cmQuY2x1c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABGPdjCJy
+    RV1GWyxSOGxkAeGuqjkRMUAOLQffDdwwrqseo55GOMNH9ad3Pw6e4w3VKKH6B0C/
+    +ub0HGARG+/DluyjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/
+    AgEBMB0GA1UdDgQWBBQRluVDpfvtfJiQ4+Echrgy6YaWlTAKBggqhkjOPQQDAgNH
+    ADBEAiAqg7H44HWHAyd8crJGL5KXqa8np7V2IniTWjWAZ+tT2gIgF3/J0zHxx3qZ
+    WkFa/RUc9jVUqnTKqsfllIP3Y9etTWs=
+    -----END CERTIFICATE-----
+    
+# service profile validator configuration
+profileValidator:
+  externalSecret: true
+
+  # if empty, Helm will auto-generate these fields
+  crtPEM: |
+
+  keyPEM: |
+
+  # if empty, Helm will auto-generate this field, unless externalSecret is set to true.
+  caBundle: |
+    -----BEGIN CERTIFICATE-----
+    MIIBkzCCATqgAwIBAgIRAPtuo5zCwwWsWUOsOiI6f68wCgYIKoZIzj0EAwIwKDEm
+    MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjIwOTE2
+    MTg0NTIzWhcNMzIwOTEzMTg0NTIzWjAoMSYwJAYDVQQDEx13ZWJob29rLmxpbmtl
+    cmQuY2x1c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABGPdjCJy
+    RV1GWyxSOGxkAeGuqjkRMUAOLQffDdwwrqseo55GOMNH9ad3Pw6e4w3VKKH6B0C/
+    +ub0HGARG+/DluyjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/
+    AgEBMB0GA1UdDgQWBBQRluVDpfvtfJiQ4+Echrgy6YaWlTAKBggqhkjOPQQDAgNH
+    ADBEAiAqg7H44HWHAyd8crJGL5KXqa8np7V2IniTWjWAZ+tT2gIgF3/J0zHxx3qZ
+    WkFa/RUc9jVUqnTKqsfllIP3Y9etTWs=
+    -----END CERTIFICATE-----
