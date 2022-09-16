@@ -19,7 +19,7 @@ spec:
       - name: HELM_REPO_URL
         value: "linkerd https://helm.linkerd.io/stable"
       - name: OPTIONS
-        value: "--release-name linkerd -n linkerd --version 2.11.4 -f values-sdbit.yaml linkerd/linkerd2"      
+        value: "--release-name linkerd -n linkerd --version 1.9.0 -f values-sdbit.yaml linkerd/linkerd-control-plane"      
   destination:
     namespace: linkerd
     server: https://kubernetes.default.svc
