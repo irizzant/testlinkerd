@@ -11,3 +11,4 @@ spec:
   source:
     path: emojivoto
     repoURL: https://github.com/irizzant/testlinkerd.git
+    targetRevision: kustomize-old
