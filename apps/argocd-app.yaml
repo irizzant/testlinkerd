@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: 'https://github.com/irizzant/testlinkerd.git'
     path: argocd/overlays/sdbit
-    targetRevision: main
+    targetRevision: old
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
