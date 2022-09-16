@@ -37,7 +37,8 @@ spec:
     namespace: linkerd
     server: https://kubernetes.default.svc
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
   ignoreDifferences:
   - group: ""
     kind: Secret

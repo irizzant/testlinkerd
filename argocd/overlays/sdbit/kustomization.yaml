@@ -8,7 +8,6 @@ commonAnnotations:
 
 resources:
 - ../../base
-- argocd-ingress.yaml
 
 patchesStrategicMerge:
 - argo-cm-patch.yaml
