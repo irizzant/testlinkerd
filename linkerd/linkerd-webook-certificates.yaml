@@ -13,7 +13,6 @@ spec:
   commonName: linkerd-policy-validator.linkerd.svc
   dnsNames:
   - linkerd-policy-validator.linkerd.svc
-  isCA: false
   privateKey:
     algorithm: ECDSA
     encoding: PKCS8
@@ -35,7 +34,6 @@ spec:
   commonName: linkerd-proxy-injector.linkerd.svc
   dnsNames:
   - linkerd-proxy-injector.linkerd.svc
-  isCA: false
   privateKey:
     algorithm: ECDSA
   usages:
@@ -56,7 +54,6 @@ spec:
   commonName: linkerd-sp-validator.linkerd.svc
   dnsNames:
   - linkerd-sp-validator.linkerd.svc
-  isCA: false
   privateKey:
     algorithm: ECDSA
   usages:
